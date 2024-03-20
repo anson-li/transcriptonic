@@ -9,6 +9,7 @@ const options = {
   minute: '2-digit',
   hour12: true
 };
+let div = document.createElement('div');
 let meetingStartTimeStamp = new Date().toLocaleString("default", options).replace(/[/:]/g, '-')
 let meetingTitle = document.title
 const extensionStatusJSON_bug = {
@@ -93,6 +94,21 @@ checkExtensionStatus().then(() => {
       })
     }
   })
+
+  // Create a new div element
+  div.id = 'transcription1'
+  div.innerText = 'Hello World';
+  div.style.position = 'fixed';
+  div.style.bottom = '50%';
+  div.style.right = '20px';
+  div.style.backgroundColor = 'black';
+  div.style.color = 'white';
+  div.style.padding = '10px';
+  div.style.boxShadow = '0 4px 8px rgba(0,0,0,0.5)';
+  div.style.zIndex = '1000'; // Ensure the div appears on top
+
+  // Append the newly created div to the body
+  document.body.appendChild(div);
 })
 
 function contains(selector, text) {
@@ -234,8 +250,10 @@ function transcriber(mutationsList, observer) {
         personNameBuffer = ""
         transcriptTextBuffer = ""
       }
-      console.log(transcriptTextBuffer)
-      // console.log(transcript)
+      // console.log(transcriptTextBuffer)
+      let divid = document.getElementById('transcription1');
+      divid.innerText = transcriptTextBuffer;
+      console.log(transcript)
     })
   }, 1000);
 }
